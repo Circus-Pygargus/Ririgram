@@ -5,7 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './assets/js/app.js',
+    register: './assets/js/register.js',
+    userForms: './assets/sass/user-forms.scss'
   },
 
   output: {
@@ -32,11 +33,12 @@ module.exports = {
   devtool:'source-map',
   plugins:[
     new MiniCSSExtractPlugin({
-      filename: '../css/style.css'
+      filename: '../css/[name].css',
+      chunkFilename: '/css/[id].css'
     }),
     new CopyPlugin([
       { from: 'assets/images', to: '../img' },
-      { from: 'assets/fonts', to: '../fonts' }
+      { from: 'assets/fonts', to: '../fonts' },
     ])
   ],
 
