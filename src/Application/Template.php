@@ -3,32 +3,35 @@
 namespace App\Application;
 
 // un \ car Twig ne fait pas partie de notre namespace (Twig n'est pas dans notre dossier src)
-use \Twig_Loader_Filesystem;
-use \Twig_Environment;
+use \Twig\Loader\FilesystemLoader;
+use \Twig\Environment;
 
 class Template {
 
         // on peut définir soit public, private ou protected
-        private const PATH = "../templates";
+        private const PATH = [
+            "../templates",
+            "../templates/security"
+        ];
 
 
         // ici le 2eme * dans /** sert à afficher des comm utilisables par l'extension PHP_Intephense
         /**
-        * @var Twig_Loader_Filesystem
+        * @var FilesystemLoader
         */
         private $loader;
 
         /**
-        * @var Twig_Environment
+        * @var Environment
         */
         private $template;
 
         // automatiquement lancée à chaque instanciation de la classe
         public function __construct () {
             // self:: car on va chercher dans le même fichier
-            $this->loader = new Twig_Loader_Filesystem(self::PATH);
+            $this->loader = new FilesystemLoader(self::PATH);
 
-            $this->template = new Twig_Environment(
+            $this->template = new Environment(
                 $this->loader,
                 array(
                     // on ne veut pas de système de cache avec twig

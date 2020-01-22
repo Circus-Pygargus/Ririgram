@@ -81,28 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./assets/js/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./assets/sass/user-forms.scss");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/js/app.js":
-/*!**************************!*\
-  !*** ./assets/js/app.js ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../sass/main.scss */ "./assets/sass/main.scss");
-
-console.log('ok !');
-
-/***/ }),
-
-/***/ "./assets/sass/main.scss":
-/*!*******************************!*\
-  !*** ./assets/sass/main.scss ***!
-  \*******************************/
+/***/ "./assets/sass/user-forms.scss":
+/*!*************************************!*\
+  !*** ./assets/sass/user-forms.scss ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -111,4 +98,4 @@ console.log('ok !');
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=userForms.js.map

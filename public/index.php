@@ -12,7 +12,13 @@ $router = new AltoRouter();
 /**
  * Routes
  */
-$router->map('GET', '/', array('c' => 'DefaultController', 'a' => 'index'));
+// home
+$router->map('GET', '/',            array('c' => 'DefaultController',               'a' => 'index'));
+// someone sent his login from connexion page
+// $router->map('POST', '/login',      array('c' => 'Security\\LoginController',       'a' => 'login'));
+// someone wants to register
+$router->map('GET', '/register',    array('c' => "Security\\RegisterController",    'a' => 'index'));
+
 
 
 /**
