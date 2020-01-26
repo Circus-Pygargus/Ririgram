@@ -48,4 +48,16 @@ class Template {
                 $params
             );
         }
+
+        public function renderBlock( string $path, string $block, $params = [] ):string
+        {
+            $templateLoad = $this->template->load( $path );      
+            return $templateLoad->renderBlock( $block, $params );
+        }
+        
+        public function load (string $path, array $params =  []) {
+            return $this->template->load(
+                $path
+            );
+        }
 }

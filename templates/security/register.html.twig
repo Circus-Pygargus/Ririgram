@@ -25,7 +25,8 @@
             <div class="container">
 
                 <!-- connexion form -->
-                <form id="log-in_form" method="post" action="login" novalidate>
+                <form id="log-in_form" novalidate>
+                {% block registerForm %}
                     <h2>Enregistrement</h2>
                     <div class="form-group">
                         <div class="label-group">
@@ -34,7 +35,7 @@
                                 <span class="question-mark" id="username-help"></span>
                                 <span class="msg-error">                                 
                                     {% if errors.username is defined %}
-                                        {{ error.username }}
+                                        {{ errors.username }}
                                     {% endif %}
                                 </span>
                             </label>
@@ -47,7 +48,7 @@
                                 Email
                                 <span class="msg-error">
                                     {% if errors.email is defined %}
-                                        {{ error.email }}
+                                        {{ errors.email }}
                                     {% endif %}
                                 </span>
                             </label>
@@ -61,7 +62,7 @@
                                 <span class="question-mark" id="password-help"></span>
                                 <span class="msg-error">
                                     {% if errors.password is defined %}
-                                       {{ error.password }}
+                                       {{ errors.password }}
                                     {% endif %}
                                 </span>
                             </label>
@@ -75,16 +76,22 @@
                                 <span class="question-mark" id="password-bis-help"></span>
                                 <span class="msg-error">
                                     {% if errors.passwordBis is defined %}
-                                        {{ error.passwordBis }}
+                                        {{ errors.passwordBis }}
                                     {% endif %}
                                 </span>
                             </label>
                         </div>
-                        <input type="password" class="form-control" id="password-bis" name="password-bis" value="{{ values.password }}">
+                        <input type="password" class="form-control" id="password-bis" name="password-bis" value="{{ values.passwordBis }}">
                     </div>
                     <!-- send-login will be used in php to check the form content -->
                     <button type="submit" name="send-login" class="btn">Enregistrer</button>
                 </form>
+                {% endblock %}
+
+                <!-- the new account was registered successfully -->
+                <div id="registered">
+                    <p>Votre compte a été enregistré avec succès !<p>
+                </div>
             </div>
         </div>
     </main>

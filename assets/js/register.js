@@ -9,114 +9,169 @@
 #######################*/
 
 // the form
-var registerFormDiv = document.querySelector('#log-in_form');
+var registerFormDiv;
 
 // the inputs
-var usernameInput = document.querySelector('#username');
-var emailInput = document.querySelector('#email');
-var passwordInput = document.querySelector('#password');
-var passwordBisInput = document.querySelector('#password-bis');
+var usernameInput;
+var emailInput;
+var passwordInput;
+var passwordBisInput;
 
 // the spans to display errors
-var usernameErrorSpan = document.querySelector('label[for="username"] span.msg-error');
-var emailErrorSpan = document.querySelector('label[for="email"] span.msg-error');
-var passwordErrorSpan = document.querySelector('label[for="password"] span.msg-error');
-var passwordBisErrorSpan = document.querySelector('label[for="password-bis"] span.msg-error');
+var usernameErrorSpan;
+var emailErrorSpan;
+var passwordErrorSpan;
+var passwordBisErrorSpan;
 
 // array including inputs and error spans
-var inputsAndSpans = [
-    ['username', usernameInput, usernameErrorSpan],
-    ['email', emailInput, emailErrorSpan],
-    ['password', passwordInput, passwordErrorSpan],
-    ['password-bis', passwordBisInput, passwordBisErrorSpan]
-];
+var inputsAndSpans = [];
 
 // the clickable question marks to display input rule helps
-var usernameQuestionMark = document.querySelector('#username-help');
-var passwordQuestionMark = document.querySelector('#password-help');
-var passwordBisQuestionMark = document.querySelector('#password-bis-help');
+var usernameQuestionMark;
+var passwordQuestionMark;
+var passwordBisQuestionMark;
+
+// array including question marks and text to display
+var helpers = [];
+
+
 
 // the text to display when a question mark is clicked
 var usernameHelp = 'Le pseudonyme doit comporter entre 3 et 20 caractères.\nIl peut être composé de :\nmajuscules\nminuscules\nchiffres\ncaractères spéciaux parmis cette liste : à â ç é è ê ë î ï ô ù û ÿ.\nLes caractères suivants - _ et espace peuvent être utilisés mais ne peuvent débuter ou finir le pseudo ni être mis cote-à-cote.';
 var passwordHelp = 'Le mot de passe doit comporter entre 8 et 20 caractères.\nIl doit être composé d\'au moins :\n1 majuscule\n1 minuscule\n1 chiffre\n1 caractère spécial.';
 var passwordBisHelp = 'Ce deuxième mot de passe doit être identique au premier.';
 
-// array including question marks and text to display
-var helpers = [
-    [usernameQuestionMark, usernameHelp],
-    [passwordQuestionMark, passwordHelp],
-    [passwordBisQuestionMark, passwordBisHelp]
-];
 
 // a boolean to know if there are errors in form to prevent submiting
 var errorFlag = false;
+
+// the div that appear once successfully registered
+var registeredDiv = document.querySelector('#registered');
+registeredDiv.style.display = 'none';
+
+
+
+
+// need to find DOM variables
+// I have found this method because the render from controller if errors in form makes that nothing is recognized anymore
+getDomVariables();
+getEventListeners();
+
 
 
 /* ######################
     Event listeners
 #######################*/
 
-// focus event on inputs
-for (let i = 0; i < inputsAndSpans.length; i++) {
-    let group = inputsAndSpans[i];
-    /* group[0] is the input id
-       group[1] is the input
-       group[2] is the associated error span */
-    group[1].addEventListener('focus', function() {
-        // remove any error class or message
-        group[1].classList.remove('value-error');
-        group[2].innerHTML = '';
-    });
-}
+function getEventListeners () {
+    // click event on a question mark
+    for (let i = 0; i < helpers.length; i++) {
+        /* helpers[i][0] : the question mark
+            helpers[i][1] : the text to display */
+        helpers[i][0].addEventListener('click', function() {
+            // preventDefault because it is associated with the label and give focus to the associated input
+            event.preventDefault();
+            alert(helpers[i][1]);
+        });
+    }
 
 
-// blur event on inputs
-for (let i = 0; i < inputsAndSpans.length; i++) {
-    let group = inputsAndSpans[i];
-    /* group[0] is the input id
-       group[1] is the input
-       group[2] is the associated error span */
-    group[1].addEventListener('blur', function() {
-        checkInputValue(group);
-    });
-}
-
-
-// submit event on form
-registerFormDiv.addEventListener('submit', function() {
-    errorFlag = false;
-    // check each input value
+    // focus event on inputs
     for (let i = 0; i < inputsAndSpans.length; i++) {
         let group = inputsAndSpans[i];
-        checkInputValue(group);
+        /* group[0] is the input id
+        group[1] is the input
+        group[2] is the associated error span */
+        group[1].addEventListener('focus', function() {
+            // remove any error class or message
+            group[1].classList.remove('value-error');
+            group[2].innerHTML = '';
+        });
     }
-    if (errorFlag) {
-        event.preventDefault();
-    }
-});
 
 
-// click event on a question mark
-for (let i = 0; i < helpers.length; i++) {
-    /* helpers[i][0] : the question mark
-        helpers[i][1] : the text to display */
-    helpers[i][0].addEventListener('click', function() {
+    // blur event on inputs
+    for (let i = 0; i < inputsAndSpans.length; i++) {
+        let group = inputsAndSpans[i];
+        /* group[0] is the input id
+        group[1] is the input
+        group[2] is the associated error span */
+        group[1].addEventListener('blur', function() {
+            checkInputValue(group);
+        });
+    }
+
+
+    // submit event on form
+    registerFormDiv.addEventListener('submit', function() {
         event.preventDefault();
-        alert(helpers[i][1]);
+        errorFlag = false;
+        // check each input value
+        for (let i = 0; i < inputsAndSpans.length; i++) {
+            let group = inputsAndSpans[i];
+            checkInputValue(group);
+        }
+        // there were at least one error in form
+        if (errorFlag) {
+            console.log('il faut corriger les erreurs dans le formulaire avant envoi !');
+        }
+        // it's ok we can send the form
+        else {
+            sendForm();
+        }
     });
 }
+
 
 
 /* ######################
     Functions
 #######################*/
 
+// get DOM variables
+    function getDomVariables () {
+        
+    // the form
+    registerFormDiv = document.querySelector('#log-in_form');
+
+    // the inputs
+    usernameInput = document.querySelector('#username');
+    emailInput = document.querySelector('#email');
+    passwordInput = document.querySelector('#password');
+    passwordBisInput = document.querySelector('#password-bis');
+
+    // the spans to display errors
+    usernameErrorSpan = document.querySelector('label[for="username"] span.msg-error');
+    emailErrorSpan = document.querySelector('label[for="email"] span.msg-error');
+    passwordErrorSpan = document.querySelector('label[for="password"] span.msg-error');
+    passwordBisErrorSpan = document.querySelector('label[for="password-bis"] span.msg-error');
+
+    // array including inputs and error spans
+    inputsAndSpans = [
+        ['username', usernameInput, usernameErrorSpan],
+        ['email', emailInput, emailErrorSpan],
+        ['password', passwordInput, passwordErrorSpan],
+        ['password-bis', passwordBisInput, passwordBisErrorSpan]
+    ];
+
+    // the clickable question marks to display input rule helps
+    usernameQuestionMark = document.querySelector('#username-help');
+    passwordQuestionMark = document.querySelector('#password-help');
+    passwordBisQuestionMark = document.querySelector('#password-bis-help');
+
+    // array including question marks and text to display
+    helpers = [
+        [usernameQuestionMark, usernameHelp],
+        [passwordQuestionMark, passwordHelp],
+        [passwordBisQuestionMark, passwordBisHelp]
+    ];
+}
+
 //  check the value of the input
 function checkInputValue (group) {
     /* group[0] is the input id
         group[1] is the input
         group[2] is the associated error span */
-    console.log(group);
     let regEx = '';
     let errorMessage = '';
 
@@ -186,14 +241,39 @@ function displayError (errorMessage, group) {
 }
 
 
+// Send form content to the server
+function sendForm () {
+    let data = {};
+    data = {
+        'username': usernameInput.value,
+        'email': emailInput.value,
+        'password': passwordInput.value,
+        'passwordBis': passwordBisInput.value
+    };
 
-
-/*  TODOs :
-
-
-
-    DONEs :
-
-        _ retirer les messages d'erreur avant le check blur et submit
-            -> dans checkInputValue() ?
-*/
+    fetch('/register/json', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "Application/json"
+        }
+    })
+    .then( function(response) {
+        return response.json();
+    })
+    .then( function(response) {
+        if (response.reponse === 'ok') {
+            console.log('fetch return, everything is fine !');
+            registerFormDiv.style.display = 'none';
+            registeredDiv.style.display = 'block';
+        }
+        else if (response.reponse === 'not ok'){
+            registerFormDiv.innerHTML = response.render;
+            getDomVariables();
+            getEventListeners();
+        }
+        else {
+            console.log(response);
+        }
+    });
+}

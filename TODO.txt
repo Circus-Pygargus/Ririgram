@@ -1,0 +1,12 @@
+
+TODOs :
+
+    _ dans register.html.twig, ajouter un bouton vers la page suivante dans div#registered pour accès         page suivante, expliquer si mail reçu pour vérif de compte
+        Ajouter du style aussi à cette même div !
+
+
+
+DONEs :
+
+        _ dans register.html.twig, retirer les messages d'erreur avant le check blur et submit
+            -> dans checkInputValue() ?
