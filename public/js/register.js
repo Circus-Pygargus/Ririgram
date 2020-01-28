@@ -180,7 +180,6 @@ function getEventListeners() {
     group[2] is the associated error span */
 
     group[1].addEventListener('blur', function () {
-      console.log(group[1].value);
       checkInputValue(group);
     });
   };
@@ -195,7 +194,8 @@ function getEventListeners() {
     errorFlag = false; // check each input value
 
     for (var _i3 = 0; _i3 < inputsAndSpans.length; _i3++) {
-      var group = inputsAndSpans[_i3]; // checkInputValue(group);
+      var group = inputsAndSpans[_i3];
+      checkInputValue(group);
     } // there were at least one error in form
 
 
@@ -241,7 +241,6 @@ function checkInputValue(group) {
   /* group[0] is the input id
       group[1] is the input
       group[2] is the associated error span */
-  console.log(group);
   var regEx = '';
   var errorMessage = '';
 
@@ -319,7 +318,6 @@ function sendForm() {
     'password': passwordInput.value,
     'passwordBis': passwordBisInput.value
   };
-  console.log(data.username);
   fetch('/register/json', {
     method: 'POST',
     body: JSON.stringify(data),

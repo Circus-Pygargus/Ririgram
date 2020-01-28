@@ -4,7 +4,7 @@ namespace App\Application;
 
 use App\Application\DatabaseConfig;
 
-class Database extends DatabaseConfig {
+abstract class Database extends DatabaseConfig {
 
     /**
      * PDO STATEMENT
@@ -13,6 +13,7 @@ class Database extends DatabaseConfig {
 
 
     public function __construct () {
+        
         $this->connect();
     }   
 
@@ -35,7 +36,8 @@ class Database extends DatabaseConfig {
     }
 
 
-    protected function fetchAll ():array {              
+    protected function fetchAll ():array {       
+
         return $this->sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
@@ -43,5 +45,11 @@ class Database extends DatabaseConfig {
     protected function fetch ():array {
 
          return $this->sth->fetch(\PDO::FETCH_ASSOC);
+    }
+
+
+    protected function fetchColumn (): int
+    {
+        return $this->sth->fetchColumn(\PDO::FETCH_ASSOC);
     }
 }
