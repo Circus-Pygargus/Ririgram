@@ -2,35 +2,35 @@
 
 namespace App\Application;
 
-use Dotenv\Dotenv;
+use \Dotenv\Dotenv;
 
-class DatabaseConfig {
+
+abstract class DatabaseConfig {
 
     /**
      * @var PDO
      */
-    public $db;
+    protected $db;
 
 
     private function config () {
+        
         // chargement de phpdotenv  ( le chemin ../ est calculé depuis index.php pour trouver .env)
-        $dotenv = \Dotenv\Dotenv::create('../');
+        $dotenv = Dotenv::createImmutable('../');
         $dotenv->load();
         
 
         try {
             // un \ devant PDO car PDO() n'appartient pas à mon espace de nom
-            $this->db = new \PDO
-                ('mysql:host=' . getenv('HOSTNAME') . ';
-                dbname=' . getenv('DBNAME'), getenv('USER'), getenv('PASSWORD'));
+            $this->db = new \PDO('mysql:host=' . getenv('HOSTNAME') . ';dbname=' . getenv('DBNAME'), getenv('USER'), getenv('PASSWORD'), [\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION,\PDO::ATTR_EMULATE_PREPARES=>false]);
         } 
-        catch (exception $e) {
-            die('erreur : ' . $e->get->message());
+        catch (\PDOException  $e) {
+            die('erreur connexion database : ' . $e->getMessage());
         }
     }
 
 
-    public function connect () {
+    protected function connect () {
       $this->config();
     }
 }
