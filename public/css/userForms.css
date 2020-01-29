@@ -69,6 +69,11 @@ form h2 {
   text-align: center;
   margin: 30px auto 30px auto; }
 
+form span.general-msg-error {
+  display: block;
+  text-align: center;
+  color: red; }
+
 form div.form-group {
   margin: 0 auto 1.5rem; }
   form div.form-group:nth-last-child(2) {

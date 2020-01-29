@@ -1,6 +1,9 @@
 
 TODOs :
 
+    _ Dans README.md, virer la ligne au début qui dit que le projet n'est pas terminé ;)
+
+
     _ dans register.html.twig, ajouter un bouton vers la page suivante dans div#registered pour accès page suivante, expliquer si mail reçu pour vérif de compte
         Ajouter du style aussi à cette même div !
 
@@ -8,5 +11,7 @@ TODOs :
 
 DONEs :
 
-        _ dans register.html.twig, retirer les messages d'erreur avant le check blur et submit
-            -> dans checkInputValue() ?
+    _ dans register.html.twig, retirer les messages d'erreur avant le check blur et submit
+        -> dans checkInputValue() ?
+        
+    _ RegisterController ajouter vérif existance du compte avant enregistrement (username & email)

@@ -6,6 +6,12 @@ form {
         margin: 30px auto 30px auto;
     }
 
+    span.general-msg-error {
+        display: block;
+        text-align: center;
+        color: red;
+    }
+
     div.form-group {
 
         margin: 0 auto 1.5rem;

@@ -28,6 +28,11 @@
                 <form id="log-in_form" novalidate>
                 {% block registerForm %}
                     <h2>Enregistrement</h2>
+                    <span class="general-msg-error">
+                        {% if errors.general is defined %}
+                            {{ errors.general }}
+                        {% endif %}
+                    </span>
                     <div class="form-group">
                         <div class="label-group">
                             <label for="username">
