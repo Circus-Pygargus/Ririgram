@@ -5,8 +5,8 @@ Ceci est une version aléatoire du jeux Nonogram
 
 # Installation 
 
-cloner le repo
-dans un terminal :
+cloner le repo<br/>
+dans un terminal, à la racine du site, taper :
 ```bash
 composer install
 yarn install
