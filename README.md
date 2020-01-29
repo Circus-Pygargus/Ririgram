@@ -1,5 +1,5 @@
 # Ririgram
-
+Attention, ce projet est en cours d'écriture et n'est pas fonctionnel pour l'instant !<br/>
 Ceci est une version aléatoire du jeux Nonogram
 
 
