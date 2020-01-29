@@ -1,13 +1,27 @@
-Ririgram
+# Ririgram
 
 Ceci est une version aléatoire du jeux Nonogram
 
 
-pour l'installer : 
-cloner le repo, 
-composer install, 
-suivi de yarn install (--no-bin-links si sous vagrant),
-créer la BDD, 
-renommer le fichier .env.sample et le remplir avec les infos de la BDD,
-pour finir : faire pointer apache vers le dossier public
+# Installation 
+
+cloner le repo
+dans un terminal :
+```bash
+composer install
+yarn install
+```
+(yarn install --no-bin-links si sous vagrant)
+
+Pour créer la BDD :
+ouvrir le fichier \src\DatabaseCreation\DatabaseCreation.php
+Remplir la partie 'Configuration de la BDD avec les infos désirées
+Renommer le fichier .env.sample en .env et le remplir avec les valeurs concernant dbUser et non root
+Dans un terminal, se placer dans \src\DatabaseCreation\ puis taper :
+```bash
+php DatabaseCreation.php
+```
+
+Pour finir
+faire pointer apache vers le dossier public
 
