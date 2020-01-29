@@ -83,7 +83,7 @@ class DatabaseCreation
             `id` INT NOT NULL AUTO_INCREMENT,
             `username` VARCHAR(20) NOT NULL,
             `email` VARCHAR(255) NOT NULL,
-            `password` VARCHAR(32) NOT NULL,
+            `password` VARCHAR(255) NOT NULL,
             `create_time` DATETIME NOT NULL,
             `update_time` DATETIME,
             PRIMARY KEY (`id`),
